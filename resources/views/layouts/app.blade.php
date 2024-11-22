@@ -95,14 +95,6 @@
                             <div>Moj profil</div>
                         </a>
                     </li>
-
-                    <!-- Front Pages -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
-                            <i class="menu-icon tf-icons ti ti-files"></i>
-                            <div>#####</div>
-                        </a>
-                    </li>
                     <li class="menu-header small">
                         <span class="menu-header-text">Liste</span>
                     </li>
@@ -148,7 +140,7 @@
                         <span class="menu-header-text">Dodatne opcije</span>
                     </li>
                     <li class="menu-item">
-                        <a href="####" target="_blank" class="menu-link">
+                        <a href="####"class="menu-link">
                             <i class="ri-mail-send-line"></i>
                             <div style="margin-left:10px">Kontakt</div>
                         </a>
@@ -485,7 +477,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item mt-0" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item mt-0" href="{{url("user",Auth::user()->id)}}">
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar avatar-online">

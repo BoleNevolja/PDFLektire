@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    //
+    public function downloads(){
+    return $this->hasMany(Download::class);
+    }
+
+    public function usersWhoDownloaded()
+{
+    return $this->belongsToMany(User::class, 'downloads', 'book_id', 'user_id');
+}
+
+
 }

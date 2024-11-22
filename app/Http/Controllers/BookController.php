@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Book;
+use App\Models\User;
+use Carbon\Carbon;
+use App\Models\Download;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -51,21 +54,43 @@ class BookController extends Controller
 
     public function index($id){
         $book = Book::findOrFail($id);
+        $downloads = Download::where('book_id', $id)
+                          ->with('user') 
+                          ->latest()      
+                          ->get();
         $data = [
             "book" => $book,
+            "downloads" => $downloads,
         ];
         return view("book.index", $data);
     }
 
     public function download($id){
         $book = Book::findOrFail($id);
+        $user = Auth::user();
+        Download::create([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+        ]);
         $path = $book->file_path;
         return response()->download(public_path($path));
         return redirect()->back();
     }
 
     public function popular(){
-        return 0;
+        $sevenDaysAgo = Carbon::now()->subDays(7);
+
+        $books = Download::selectRaw('book_id, COUNT(*) as downloads_count')
+        ->where('created_at', '>=', $sevenDaysAgo)
+        ->groupBy('book_id')
+        ->orderByDesc('downloads_count') 
+        ->limit(10) 
+        ->with('book') 
+        ->get();
+        $data = [
+            "books" => $books,
+        ];
+        return view("popular",$data);
     }
 
     public function new(){

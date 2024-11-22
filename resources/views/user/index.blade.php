@@ -56,4 +56,25 @@
                 </div>
             </div>
         </div>
+        @foreach($downloads as $download)
+        <a href="{{url("book", $download->book->id)}}"><div class="row mb-12 g-6">
+            <div class="col-md">
+              <div class="card">
+                <div class="row g-0">
+
+                    <img class="card-img card-img-left" style="height:220px; width:220px" src="{{asset($download->book->thumbnail)}}" alt="Card image">
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{$download->book->name}}</h5>
+                      <p class="card-text">
+                        {{$download->book->desc}}
+                      </p>
+                      <p class="card-text"><small class="text-muted">Preuzeto {{ $download->created_at->format('d F Y') }}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
     @endsection
