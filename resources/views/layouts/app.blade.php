@@ -129,7 +129,7 @@
                         <span class="menu-header-text">Postani autor</span>
                     </li>
                     <li class="menu-item">
-                        <a href="####" class="menu-link">
+                        <a href="{{url("publish")}}" class="menu-link">
                             <i class="ri-book-fill"></i>
                             <div style="margin-left:10px">Dodaj knjigu</div>
                         </a>
@@ -140,7 +140,7 @@
                         <span class="menu-header-text">Dodatne opcije</span>
                     </li>
                     <li class="menu-item">
-                        <a href="####"class="menu-link">
+                        <a href="{{url("contact")}}"class="menu-link">
                             <i class="ri-mail-send-line"></i>
                             <div style="margin-left:10px">Kontakt</div>
                         </a>
@@ -158,11 +158,31 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="####" class="menu-link">
+                        <a href="{{url("donate")}}" class="menu-link">
                             <i class="ri-hand-heart-line" style="margin-right:10px"></i>
                             <div style="margin-left:10px">Doniraj</div>
                         </a>
                     </li>
+                    @if(Auth::user()->role == 2)
+                    <li class="menu-header small">
+                        <span class="menu-header-text">Admin opcije</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{url("status")}}" class="menu-link">
+                            <div >Neprovjerene knjige</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{url("chat")}}" class="menu-link">
+                            <div >Poruke</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{url("/book/create")}}" class="menu-link">
+                            <div >Dodaj zvaničnu knjigu</div>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -515,7 +535,7 @@
                                         <div class="dropdown-divider my-1 mx-n2"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="####">
+                                        <a class="dropdown-item" href="{{url("publish")}}">
                                             <i class="ri-book-fill" style="margin-right: 10px"></i>
                                             <span class="align-middle">Postani autor</span>
                                         </a>

@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    return redirect("home");
 })->middleware("auth");
 
 Auth::routes();
@@ -11,6 +11,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq')->middleware("auth");
 Route::get('/cc', [App\Http\Controllers\HomeController::class, 'cc'])->name('cc')->middleware("auth");
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'find'])->name('find')->middleware("auth");
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact')->middleware("auth");
+Route::get('/donate', [App\Http\Controllers\HomeController::class, 'donate'])->name('donate')->middleware("auth");
 
 Route::get('/book/create', [App\Http\Controllers\BookController::class, 'create'])->name('addbook')->middleware("auth");
 Route::post('/store/book', [App\Http\Controllers\BookController::class, 'store'])->name('storebook')->middleware("auth");
@@ -20,5 +22,11 @@ Route::get('/popular', [App\Http\Controllers\BookController::class, 'popular'])-
 Route::get('/new', [App\Http\Controllers\BookController::class, 'new'])->name('new')->middleware("auth");
 Route::get('/textbook', [App\Http\Controllers\BookController::class, 'textbook'])->name('textbook')->middleware("auth");
 Route::get('/our', [App\Http\Controllers\BookController::class, 'our'])->name('our')->middleware("auth");
+Route::get('/publish', [App\Http\Controllers\BookController::class, 'publish'])->name('publish')->middleware("auth");
+Route::post('/published', [App\Http\Controllers\BookController::class, 'published'])->name('published')->middleware("auth");
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])->name('user')->middleware("auth");
+
+Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->name('status')->middleware("auth");
+Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");
+Route::get('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->name('sent')->middleware("auth");

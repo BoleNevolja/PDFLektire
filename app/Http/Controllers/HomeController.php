@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::where('status', 2)->get();
         $data = [
             'books' => $books,
         ];
@@ -48,5 +48,13 @@ class HomeController extends Controller
 
     public function cc(){
         return view("stative.cc");
+    }
+
+    public function contact(){
+        return view("contact");
+    }
+
+    public function donate(){
+        return view("donate");
     }
 }

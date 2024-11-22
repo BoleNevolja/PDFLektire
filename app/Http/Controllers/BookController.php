@@ -46,7 +46,7 @@ class BookController extends Controller
         }
         $book->file_path = "/books/pdf/" . $newBookName;
         $book->thumbnail = "/books/thumbnail/" . $newThumbnailName;
-        $book->file_size = $fileSize / 1024;
+        $book->file_size = round($fileSize / 1024);
         $book->save();
         return view("book.create");
         
@@ -110,6 +110,45 @@ class BookController extends Controller
     }
 
     public function our(){
-        return 0;
+        $books = Book::whereNotNull('user_id')
+             ->where('status', 2)
+             ->get();
+             $data = [
+                "books" => $books,
+             ];
+             return view("home", $data);
+    }
+
+    public function publish(){
+        return view("book.publish");
+    }
+
+    public function published(Request $request){
+        $file = $request->file("book");
+        $fileSize = $file->getSize();
+        $newBookName = Auth::user()->id . "-" . rand(1000,10000) . ".pdf";
+        $newThumbnailName = Auth::user()->id . "-" . rand(1000,10000) . ".png";
+        $request->validate([
+            'book' => ['mimes:pdf'],
+            'thumbnail' => ['mimes:png'],
+        ]);
+        $request->book->move(public_path("books/pdf"), $newBookName);
+        $request->thumbnail->move(public_path("books/thumbnail"), $newThumbnailName);
+        $book = new Book;
+        $book->name = $request->name;
+        $book->author = Auth::user()->name;
+        $book->user_id = Auth::user()->id;
+        $book->desc = $request->desc;
+        $book->textbook = 1;
+        $book->status = 1;
+        $book->file_path = "/books/pdf/" . $newBookName;
+        $book->thumbnail = "/books/thumbnail/" . $newThumbnailName;
+        $book->file_size = round($fileSize / 1024);
+        $book->save();
+        $newBook = Book::find($book->id);
+        $data = [
+            "newBook" => $newBook,
+        ];
+        return view("book.status",$data);
     }
 }

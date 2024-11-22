@@ -48,4 +48,8 @@ class User extends Authenticatable
 {
     return $this->belongsToMany(Book::class, 'downloads', 'user_id', 'book_id');
 }
+
+public function books(){
+    return $this->hasMany(Book::class);
+}
 }

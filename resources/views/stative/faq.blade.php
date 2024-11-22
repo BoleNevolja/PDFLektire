@@ -20,7 +20,7 @@
   <div class="card-body">
     <h5 class="card-title text-primary"><b>Kako nabavljate knjige?</b></h5>
     <p class="card-text text-primary">
-      Naše knjige su nabavljenje na 100% legalan način koristeći PDF-ove <i>bez oznake</i>. Za više informacije možete nas kontaktirati <u><a href="###">ovde</a></u>
+      Naše knjige su nabavljenje na 100% legalan način koristeći PDF-ove <i>bez oznake</i>. Za više informacije možete nas kontaktirati <u><a href="{{url("contact")}}">ovde</a></u>
     </p>
   </div>
 </div>
@@ -65,7 +65,7 @@
   <div class="card-body">
     <h5 class="card-title text-primary"><b>Kako mogu da doprinesem?</b></h5>
     <p class="card-text text-primary">
-      Dovoljan doprinos našem radu dajete samo čitajući i djeleći naš sajt, ali ako ste u mogućnosti možete nas i novačno podržati <u><a href="###">ovde</a></u>
+      Dovoljan doprinos našem radu dajete samo čitajući i djeleći naš sajt, ali ako ste u mogućnosti možete nas i novačno podržati <u><a href="{{url("donate")}}">ovde</a></u>
     </p>
   </div>
 </div>
@@ -101,7 +101,7 @@
   <div class="card-body">
     <h5 class="card-title text-primary"><b>Nismo odgovorili na Vaše pitanje?</b></h5>
     <p class="card-text text-primary">
-      Kontaktirajte nas <u><a href="####">ovde<a></u>
+      Kontaktirajte nas <u><a href="{{url("contact")}}">ovde<a></u>
     </p>
   </div>
 </div>
