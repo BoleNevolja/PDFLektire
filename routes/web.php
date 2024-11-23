@@ -29,4 +29,6 @@ Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])-
 
 Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->name('status')->middleware("auth");
 Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");
-Route::get('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->name('sent')->middleware("auth");
+Route::post('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->name('sent')->middleware("auth");
+
+Route::post('/addcomment', [App\Http\Controllers\CommentController::class, 'add'])->name('addcoment')->middleware("auth");

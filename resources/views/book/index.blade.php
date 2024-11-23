@@ -81,10 +81,31 @@
         </div>
 
         <div class="comments hidden" id="com">
-            SOOn
+            <form method="POST" action="/addcomment">
+                @csrf
+                <div class="mb-3">
+                  <textarea rows="4" type="text" name ="content" class="form-control" placeholder="Dodaj komentar" id="content" aria-describedby="emailHelp"></textarea>
+                  <input type="hidden" name="bookid" value="{{$book->id}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Objavi</button>
+              </form><br>
+              @if ($comments->isEmpty())
+                   <h3>NEMA KOMENTARA</h3>
+               @endif
+              @foreach ($comments as $comment)
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $comment->user->name }}</h5>
+                        <p class="card-text"><small class="text-muted">{{$comment->content}}</small></p>                        
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <div class="downloads hidden" id="dwn">
+            @if ($downloads->isEmpty())
+                   <h3>NEMA PREUZIMANJA</h3>
+               @endif
             @foreach ($downloads as $download)
                 <div class="card">
                     <div class="card-body">

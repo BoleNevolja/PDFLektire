@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Comment;
 use Carbon\Carbon;
 use App\Models\Download;
 use Illuminate\Support\Facades\Auth;
@@ -58,9 +59,14 @@ class BookController extends Controller
                           ->with('user') 
                           ->latest()      
                           ->get();
+        $comments = Comment::where('book_id', $id)
+                          ->with('user') // Include user details (if applicable)
+                          ->latest()     // Sort by the latest comments
+                          ->get();                 
         $data = [
             "book" => $book,
             "downloads" => $downloads,
+            "comments" => $comments,
         ];
         return view("book.index", $data);
     }

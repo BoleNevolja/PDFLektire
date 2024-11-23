@@ -5,11 +5,11 @@
   @csrf
     <div class="mb-3" style="width:50%">
       <label for="exampleInputEmail1" class="form-label">Predmet</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input type="text" class="form-control" required id="subject" name="subject">
     </div>
     <div class="mb-3" style="width:50%">
         <label for="exampleInputEmail1" class="form-label">Poruka</label>
-        <textarea rows="4" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
+        <textarea rows="4" type="text" required class="form-control" id="content" name="content"></textarea>
       </div>
     <button type="submit" class="btn btn-primary">Pošalji</button>
   </form><br>
