@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Message;
 use Carbon\Carbon;
+use App\Models\Answer;
+use App\Models\Notification;
 use App\Models\Download;
 use Illuminate\Http\Request;
 
@@ -38,5 +40,30 @@ class AdminController extends Controller
             "messages" => $messages,
         ];
         return view("admin.chat",$data);
+    }
+
+    public function respond(Request $request){
+        $answer = new Answer;
+        $answer->user_id = $request->usr_id;
+        $answer->message_id = $request->msg_id;
+        $answer->content = $request->reply;
+        $answer->status = 1;
+        $answer->save();
+
+        $id = $request->msg_id;
+        $message = Message::findOrFail($id);
+        $message->status = 2;
+        $message->save();
+
+        $notification = new Notification;
+        $notification->user_id = $request->usr_id;
+        $notification->content_id = $request->msg_id;
+        $notification->content_type = 1;
+        $notification->status = 1;
+        $t = "Administratori su odgovorili na Vašu poruku. Proverite!";
+        $notification->short_text = $t;
+        $notification->save();
+
+        return redirect("/chat");
     }
 }

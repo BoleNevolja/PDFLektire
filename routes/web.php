@@ -13,6 +13,8 @@ Route::get('/cc', [App\Http\Controllers\HomeController::class, 'cc'])->name('cc'
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'find'])->name('find')->middleware("auth");
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact')->middleware("auth");
 Route::get('/donate', [App\Http\Controllers\HomeController::class, 'donate'])->name('donate')->middleware("auth");
+Route::get('/notifications', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications')->middleware("auth");
+Route::delete('/notification/delete', [App\Http\Controllers\HomeController::class, 'deletenot'])->name('notification.delete')->middleware("auth");
 
 Route::get('/book/create', [App\Http\Controllers\BookController::class, 'create'])->name('addbook')->middleware("auth");
 Route::post('/store/book', [App\Http\Controllers\BookController::class, 'store'])->name('storebook')->middleware("auth");
@@ -26,9 +28,12 @@ Route::get('/publish', [App\Http\Controllers\BookController::class, 'publish'])-
 Route::post('/published', [App\Http\Controllers\BookController::class, 'published'])->name('published')->middleware("auth");
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])->name('user')->middleware("auth");
+Route::get('/user/settings/{id}', [App\Http\Controllers\UserController::class, 'settings'])->name('settings')->middleware("auth");
+Route::put('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('edituser')->middleware("auth");
 
 Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->name('status')->middleware("auth");
 Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");
 Route::post('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->name('sent')->middleware("auth");
+Route::post('/respond', [App\Http\Controllers\AdminController::class, 'respond'])->name('respond')->middleware("auth");
 
 Route::post('/addcomment', [App\Http\Controllers\CommentController::class, 'add'])->name('addcoment')->middleware("auth");

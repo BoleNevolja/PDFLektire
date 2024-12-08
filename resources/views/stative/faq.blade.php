@@ -14,97 +14,74 @@
       max-width: 1150px; /* Maintains the intended maximum width */
   }
 </style>
-<div style="margin-left:125px">
-<div class="row">
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Kako nabavljate knjige?</b></h5>
-    <p class="card-text text-primary">
-      Naše knjige su nabavljenje na 100% legalan način koristeći PDF-ove <i>bez oznake</i>. Za više informacije možete nas kontaktirati <u><a href="{{url("contact")}}">ovde</a></u>
-    </p>
-  </div>
-</div>
+<div style="margin-left:3%; margin-right:3%">
+  <div class="accordion mt-4 accordion-header-primary" id="accordionStyle1">
+    <div class="accordion-item card">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-1" aria-expanded="false">
+          Postoji li ograničen broj knjiga koje se mogu preuzeti?
+        </button>
+      </h2>
+  
+      <div id="accordionStyle1-1" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1" style="">
+        <div class="accordion-body">
+          <b>Ne.</b> Možete da preuzimate neograničen broj knjiga sa našeg sajta.
+        </div>
+      </div>
+    </div>
+  
+    <div class="accordion-item card">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-2" aria-expanded="false">
+          Da li aplikacija omogućava čitanje knjiga direktno ili se ipak moraju preuzeti?
+        </button>
+      </h2>
+      <div id="accordionStyle1-2" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1">
+        <div class="accordion-body">
+          Da biste čitali knjige sa našeg sajta <b>morate ih prvo preuzeti</b>.
+        </div>
+      </div>
+    </div>
+  
+    <div class="card accordion-item">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-3" aria-expanded="false">
+          Kako mogu da preporučim knjige za dodavanje na sajt?
+        </button>
+      </h2>
+      <div id="accordionStyle1-3" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1" style="">
+        <div class="accordion-body">
+          Za preporučivanje knjiga možete da nam se obratite <a href="{{url("contact")}}"><u>ovde</u></a>
+        </div>
+      </div>
+    </div>
 
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Koliko knjiga imate u bazi?</b></h5>
-    <p class="card-text text-primary">
-      Naša baza sa knjiga konstanto raste i sigurno imamo ono što tražite
-    </p>
-  </div>
-</div>
+    <div class="card accordion-item">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-4" aria-expanded="false">
+          Koje formate knjiga aplikacija podržava osim PDF-a?
+        </button>
+      </h2>
+      <div id="accordionStyle1-4" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1" style="">
+        <div class="accordion-body">
+          <b>Samo PDF.  </b>
+        </div>
+      </div>
+    </div>
 
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Kako da objavim svoju knjigu?</b></h5>
-    <p class="card-text text-primary">
-      Naša platforma je unikatna time što omogućava korisnicima da objave svoju knjigu. To možete učiniti <u><a href="###">ovde</a></u>
-    </p>
-  </div>
-</div>
+    <div class="card accordion-item">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-5" aria-expanded="false">
+          Mogu li da kreiram listu omiljenih knjiga?
+        </button>
+      </h2>
+      <div id="accordionStyle1-5" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1" style="">
+        <div class="accordion-body">
+          <b>###</b>
+        </div>
+      </div>
+    </div>
 
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Da li može da se zaradi objavom knjiga na vašu stranicu?</b></h5>
-    <p class="card-text text-primary">
-      Za sada odgovor je nažalost <b>NE</b>, ali nadamo se u budućnosti da će kreativni autori biti nagrađeni
-    </p>
   </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Da li smijem da dalje dijelim knjigu sa ovog sajta?</b></h5>
-    <p class="card-text text-primary">
-      Mi smatramo da knjige trebaju biti svima dostupne tako da nemamo ništa protiv daljeg djeljenja naših knjiga
-    </p>
-  </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Kako mogu da doprinesem?</b></h5>
-    <p class="card-text text-primary">
-      Dovoljan doprinos našem radu dajete samo čitajući i djeleći naš sajt, ali ako ste u mogućnosti možete nas i novačno podržati <u><a href="{{url("donate")}}">ovde</a></u>
-    </p>
-  </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Da li nudite prepričane knjige?</b></h5>
-    <p class="card-text text-primary">
-      Odgovor je <b>NE</b>, mi djelimo isljučivo PDF verzije knjiga. Za prepričane knjige možete pogledati <u><a href="https://www.lektire.rs/">ovaj sajt</a></u>
-    </p>
-  </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Gdje idu pare od donacija?</b></h5>
-    <p class="card-text text-primary">
-      Pare koje donirate našoj ekipi idu direktno u poboljšavanje naše usluge
-    </p>
-  </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Koliko ljudi čini vaš tim?</b></h5>
-    <p class="card-text text-primary">
-      U našem timu radi 3 ljudi
-    </p>
-  </div>
-</div>
-
-<div class="card shadow-none bg-transparent border border-primary q">
-  <div class="card-body">
-    <h5 class="card-title text-primary"><b>Nismo odgovorili na Vaše pitanje?</b></h5>
-    <p class="card-text text-primary">
-      Kontaktirajte nas <u><a href="{{url("contact")}}">ovde<a></u>
-    </p>
-  </div>
-</div>
-</div>
 </div>
 @endsection

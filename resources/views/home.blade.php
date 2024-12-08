@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div style="margin-left:125px; margin-top:40px">
+    <div style="margin-left:2%; margin-top:40px">
         @if ($books->isEmpty())
             <h4 class="no-post"><i>NEMA REZULTATA</i>&#128531;</h4>
         @endif
-        <div class="row row-cols-1 row-cols-md-5 g-2">
+        <div class="row row-cols-1 row-cols-md-5 g-0">
             @foreach ($books as $book)
                 <a href="{{ url('/book/' . $book->id) }}">
-                    <div class="col">
-                        <div class="card h-100" style="width:300px; height:600px; max-height:600px">
+                    <div class="col" style="margin-bottom:30px">
+                        <div class="card h-100" style="width:270px; height:600px; max-height:600px">
                             <img class="card-img-top" src="{{ asset($book->thumbnail) }}" alt="thumbnail">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $book->name }}</h5>

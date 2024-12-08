@@ -21,4 +21,22 @@ class UserController extends Controller
         ];
         return view("user.index",$data);
     }
+
+    public function settings($id){
+        $user = User::findOrFail($id);
+        $data = [
+            "user" => $user,
+        ];
+        return view("settings", $data);
+    }
+
+    public function edit(Request $request, $id){
+        $user = User::findOrFail($id);
+        if(Auth::user()->id != $id){
+            return abort(403, "Neovlašteno");
+        }
+        $user->name = $request->name;
+        $user->save();
+        return redirect()->back();
+    }
 }

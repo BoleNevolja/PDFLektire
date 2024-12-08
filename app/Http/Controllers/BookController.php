@@ -80,7 +80,6 @@ class BookController extends Controller
         ]);
         $path = $book->file_path;
         return response()->download(public_path($path));
-        return redirect()->back();
     }
 
     public function popular(){

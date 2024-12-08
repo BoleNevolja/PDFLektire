@@ -41,7 +41,8 @@
                                         </li>
                                     </ul><br>
                                     <p>{{ $book->desc }}</p>
-                                    <a href="{{ url('book/download/' . $book->id) }}"
+                                    <a onclick="setTimeout(() => { new bootstrap.Modal(document.getElementById('addNewCCModal')).show(); }, 500);"
+                                        href="{{ url('book/download/' . $book->id) }}"
                                         class="btn btn-primary mb-1 waves-effect waves-light">
                                         <i class="ri-download-2-line" style="margin-right: 5px"></i></i>Preuzmi
                                     </a>
@@ -84,19 +85,20 @@
             <form method="POST" action="/addcomment">
                 @csrf
                 <div class="mb-3">
-                  <textarea rows="4" type="text" name ="content" class="form-control" placeholder="Dodaj komentar" id="content" aria-describedby="emailHelp"></textarea>
-                  <input type="hidden" name="bookid" value="{{$book->id}}">
+                    <textarea rows="4" type="text" name ="content" class="form-control" placeholder="Dodaj komentar" id="content"
+                        aria-describedby="emailHelp"></textarea>
+                    <input type="hidden" name="bookid" value="{{ $book->id }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Objavi</button>
-              </form><br>
-              @if ($comments->isEmpty())
-                   <h3>NEMA KOMENTARA</h3>
-               @endif
-              @foreach ($comments as $comment)
+            </form><br>
+            @if ($comments->isEmpty())
+                <h3>NEMA KOMENTARA</h3>
+            @endif
+            @foreach ($comments as $comment)
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ $comment->user->name }}</h5>
-                        <p class="card-text"><small class="text-muted">{{$comment->content}}</small></p>                        
+                        <p class="card-text"><small class="text-muted">{{ $comment->content }}</small></p>
                     </div>
                 </div>
             @endforeach
@@ -104,8 +106,8 @@
 
         <div class="downloads hidden" id="dwn">
             @if ($downloads->isEmpty())
-                   <h3>NEMA PREUZIMANJA</h3>
-               @endif
+                <h3>NEMA PREUZIMANJA</h3>
+            @endif
             @foreach ($downloads as $download)
                 <div class="card">
                     <div class="card-body">
@@ -153,4 +155,18 @@
                 document.getElementById("com").classList.add("hidden");
             }
         </script>
+        <div class="modal fade" id="addNewCCModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="text-center mb-6">
+                            <h4 class="mb-2">Hvala, {{ Auth::user()->name }}&#x1F49C</h4>
+                            <p>Možeš podržati naš dalji rad jednokratnom donacijom <a href="{{url("donate")}}"><u>ovde</u></a>
+                                &#x1F49C </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endsection

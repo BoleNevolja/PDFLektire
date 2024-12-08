@@ -34,6 +34,9 @@
                                                     {{ \Carbon\Carbon::parse($user->created_at)->locale('sr')->format('d F Y') }}</span>
                                             </li>
                                         </ul>
+                                        @if(Auth::user()->id == $user->id)
+                                        <a href="{{url("user/settings/" . $user->id)}}"><button style="margin-top:10px" type="button" class="btn btn-label-primary waves-effect"><i class="ri-edit-box-line" style="margin-right:3px"></i>Uredi profil</button></a>
+                                        @endif
                                 </div>
                             </div>
                         </div>

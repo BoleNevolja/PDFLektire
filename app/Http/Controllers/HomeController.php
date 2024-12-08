@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Book;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -56,5 +57,20 @@ class HomeController extends Controller
 
     public function donate(){
         return view("donate");
+    }
+
+    public function notifications(){
+        $id = Auth::user()->id;
+        $notifications = Notification::where('user_id', $id)->where('status', 1)->get();
+        $data = [
+            'notifications' => $notifications,
+        ];
+        return view('notification', $data);
+    }
+
+    public function deletenot(Request $request){
+        $notification = Notification::find($request->notification_id);
+        $notification->delete();
+        return response()->json(['success' => false, 'message' => 'Notification not found']);
     }
 }
