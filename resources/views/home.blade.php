@@ -29,4 +29,21 @@
             @endforeach
         </div>
     </div>
+    @if($cc == 1)
+    <script>
+        document.getElementById("new-btn").classList.add("active");
+    </script>
+    @elseif($cc == 2)
+    <script>
+        document.getElementById("lek-btn").classList.add("active");
+    </script>
+    @elseif($cc == 3)
+    <script>
+        document.getElementById("our-btn").classList.add("active");
+    </script>
+    @else
+    <script>
+        document.getElementById("home-btn").classList.add("active");
+    </script>
+    @endif
 @endsection

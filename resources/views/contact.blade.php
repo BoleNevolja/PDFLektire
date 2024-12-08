@@ -15,4 +15,7 @@
   </form><br>
   <h4>Možda smo odgovorili na Vaše pitanje <u><a href="{{url("faq")}}">ovde</a></u></h4>
 </div>
+<script>
+  document.getElementById("contact-btn").classList.add("active");
+</script>
 @endsection

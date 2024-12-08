@@ -84,4 +84,7 @@
 
   </div>
 </div>
+<script>
+  document.getElementById("faq-btn").classList.add("active");
+</script>
 @endsection

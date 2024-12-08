@@ -79,7 +79,7 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item">
+                    <li class="menu-item" id="home-btn">
                         <a href="{{ url('home') }}" class="menu-link">
                             <i class="ri-home-2-line" style="margin-right: 10px"></i>
                             <div>Početna</div>
@@ -88,13 +88,13 @@
 
 
                     <!-- Layouts -->
-                    <li class="menu-item">
+                    <li class="menu-item" id="profile-btn">
                         <a href="{{ url('user', Auth::user()->id) }}" class="menu-link">
                             <i class="ri-user-line" style="margin-right: 10px"></i>
                             <div>Moj profil</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="nots-btn">
                         <a href="{{ url('notifications') }}" class="menu-link">
                             <i class="ri-notification-3-line" style="margin-right: 10px"></i>
                             <div>Notifikacije</div>
@@ -104,25 +104,25 @@
                         <span class="menu-header-text">Liste</span>
                     </li>
                     <!-- Forms -->
-                    <li class="menu-item">
+                    <li class="menu-item" id="popular-btn">
                         <a href="{{ url('popular') }}" class="menu-link">
                             <i class="ri-fire-line" style="margin-right:10px"></i>
                             <div>Najpopularnije</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="new-btn">
                         <a href="{{ url('new') }}" class="menu-link">
                             <i class="ri-newspaper-line" style="margin-right:10px"></i>
                             <div>Najnovije</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="lek-btn">
                         <a href="{{ url('textbook') }}" class="menu-link">
                             <i class="ri-book-3-fill" style="margin-right:10px"></i>
                             <div>Lektire</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="our-btn">
                         <a href="{{ url('our') }}" class="menu-link">
                             <i class="ri-contacts-book-2-fill" style="margin-right: 10px"></i>
                             <div>Knjige naših autora</div>
@@ -133,7 +133,7 @@
                     <li class="menu-header small">
                         <span class="menu-header-text">Postani autor</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="add-book">
                         <a href="{{ url('publish') }}" class="menu-link">
                             <i class="ri-book-fill"></i>
                             <div style="margin-left:10px">Dodaj knjigu</div>
@@ -144,25 +144,25 @@
                     <li class="menu-header small">
                         <span class="menu-header-text">Dodatne opcije</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="contact-btn">
                         <a href="{{ url('contact') }}"class="menu-link">
                             <i class="ri-mail-send-line"></i>
                             <div style="margin-left:10px">Kontakt</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="cc">
                         <a href="{{ url('cc') }}" class="menu-link">
                             <i class="ri-file-paper-2-line"></i>
                             <div style="margin-left:10px">Autorska prava</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="faq-btn">
                         <a href="{{ url('faq') }}" class="menu-link">
                             <i class="ri-question-mark" style="margin-right:10px"></i>
                             <div style="margin-left:10px">FAQ</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="donate-btn">
                         <a href="{{ url('donate') }}" class="menu-link">
                             <i class="ri-hand-heart-line" style="margin-right:10px"></i>
                             <div style="margin-left:10px">Doniraj</div>
@@ -243,9 +243,9 @@
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                                                     @if (Auth::user()->role == 2)
-                                                        <small class="text-muted">Admin</small>
+                                                        <i><small class="text-muted">Admin</small></i>
                                                     @else
-                                                        <small class="text-muted">Korisnik</small>
+                                                        <small class="text-muted">Korisnik</small></i>
                                                     @endif
                                                 </div>
                                             </div>

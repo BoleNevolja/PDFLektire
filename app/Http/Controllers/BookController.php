@@ -100,26 +100,32 @@ class BookController extends Controller
 
     public function new(){
         $books = Book::orderBy("created_at", "desc")->get();
+        $cc = 1;
         $data = [
             "books" => $books,
+            "cc" => $cc,
         ];
         return view("home", $data);
     }
 
     public function textbook(){
         $books = Book::where('textbook', 2)->get();
+        $cc = 2;
         $data = [
             "books" => $books,
+            "cc" => $cc,
         ];
         return view("home", $data);
     }
 
     public function our(){
+        $cc = 3;
         $books = Book::whereNotNull('user_id')
              ->where('status', 2)
              ->get();
              $data = [
                 "books" => $books,
+                "cc" => $cc,
              ];
              return view("home", $data);
     }

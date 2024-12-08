@@ -33,4 +33,8 @@
     <b>4.</b>Slanjem dokumenta korisnik se odriče svoje mogućnosti njegovog uklanjanja<br>
     <b>5.</b>Slanjem dokumente dopuštate sajtu da je zadrži iako je ne objavi</p>
 </div>
+
+<script>
+  document.getElementById("add-book").classList.add("active");
+</script>
 @endsection

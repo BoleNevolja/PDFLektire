@@ -29,4 +29,7 @@
             @endforeach
         </div>
     </div>
+    <script>
+        document.getElementById("popular-btn").classList.add("active");
+    </script>
 @endsection

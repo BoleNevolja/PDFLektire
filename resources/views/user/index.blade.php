@@ -80,4 +80,8 @@
             </div>
           </div>
           @endforeach
+
+          <script>
+            document.getElementById("profile-btn").classList.add("active");
+        </script>
     @endsection

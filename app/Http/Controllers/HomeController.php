@@ -26,8 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $books = Book::where('status', 2)->get();
+        $cc = 4243765;
         $data = [
             'books' => $books,
+            "cc" => $cc,
         ];
         return view('home', $data);
     }

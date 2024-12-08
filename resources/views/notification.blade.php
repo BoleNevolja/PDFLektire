@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
 <div style="margin-left:125px; margin-top:40px; margin-right:140px">
+@if($notifications->isEmpty())
+<h4 class="no-post"><i>NEMA NOTIFIKACIJA</i>&#128531;</h4>
+@endif
+
 @foreach ($notifications as $notification)
 <a href="####">
     <div class="alert alert-primary alert-dismissible" role="alert">
@@ -14,6 +18,9 @@
   </div>
 @endforeach
 </div>
+<script>
+    document.getElementById("nots-btn").classList.add("active");
+</script>
 @endsection
 
 <script>
