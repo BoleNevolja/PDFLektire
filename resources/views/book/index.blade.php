@@ -41,11 +41,48 @@
                                         </li>
                                     </ul><br>
                                     <p>{{ $book->desc }}</p>
-                                    <a onclick="setTimeout(() => { new bootstrap.Modal(document.getElementById('addNewCCModal')).show(); }, 500);"
+                                    <div class="row row-cols-1 row-cols-md-5 g-2">
+                                    <a style="height:40px;width:130px" onclick="setTimeout(() => { new bootstrap.Modal(document.getElementById('addNewCCModal')).show(); }, 500);"
                                         href="{{ url('book/download/' . $book->id) }}"
                                         class="btn btn-primary mb-1 waves-effect waves-light">
                                         <i class="ri-download-2-line" style="margin-right: 5px"></i></i>Preuzmi
                                     </a>
+                                    <div class="favorite-buttons">
+                                        @if ($user->favoriteBooks->contains($book))
+                                        <div id="unlike">
+                                            <button style="height:40px;width:130px" id="unlike" onclick="removeFromFavorites({{ $book->id }})"
+                                                href="javascript:void(0);"
+                                                class="btn rounded-pill btn-danger mb-1 waves-effect waves-light">
+                                                <i class="ri-heart-fill" style="margin-right: 5px"></i></i>Ukloni iz
+                                                omiljenih
+                                            </button></div>
+                                            <div class="hidden" id="like">
+                                                <button style="height:40px;width:130px" onclick="addToFavorites({{ $book->id }})"
+                                                    href="javascript:void(0);"
+                                                    class="btn rounded-pill btn-success mb-1 waves-effect waves-light">
+                                                    <i class="ri-heart-line" style="margin-right: 5px"></i></i>Dodaj u
+                                                    omiljene
+                                                </button>
+                                            </div>
+                                        @else
+                                            <div class="hidden" id="unlike">
+                                                <button style="height:40px;width:130px" onclick="removeFromFavorites({{ $book->id }})"
+                                                    href="javascript:void(0);"
+                                                    class="hidden btn rounded-pill btn-danger mb-1 waves-effect waves-light">
+                                                    <i class="ri-heart-fill" style="margin-right: 5px"></i></i>Ukloni iz
+                                                    omiljenih
+                                                </button>
+                                            </div>
+                                            <div id="like">
+                                                <button style="height:40px;width:130px" onclick="addToFavorites({{ $book->id }})"
+                                                    href="javascript:void(0);"
+                                                    class="btn rounded-pill btn-success mb-1 waves-effect waves-light">
+                                                    <i class="ri-heart-line" style="margin-right: 5px"></i></i>Dodaj u
+                                                    omiljene
+                                                </button>
+                                            </div>
+                                        @endif
+                                    </div></div>
                                 </div>
                             </div>
                         </div>
@@ -119,6 +156,44 @@
         </div>
 
         <script>
+            function addToFavorites(bookId) {
+                $.ajax({
+                    url: '{{ route('like') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        book_id: bookId,
+                    },
+                    success: function(response) {
+                        console.log("Success");
+                        document.getElementById("unlike").classList.remove("hidden");
+                        document.getElementById("like").classList.add("hidden");
+                    },
+                    error: function(xhr) {
+                        console.log("Error");
+                    }
+                });
+            }
+
+            function removeFromFavorites(bookId) {
+                $.ajax({
+                    url: '{{ route('unlike') }}',
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        book_id: bookId
+                    },
+                    success: function(response) {
+                        console.log("Success");
+                        document.getElementById("like").classList.remove("hidden");
+                        document.getElementById("unlike").classList.add("hidden");
+                    },
+                    error: function(xhr) {
+                        console.log("Error");
+                    }
+                });
+            }
+
             function pdf() {
 
                 document.getElementById("pdf-btn").classList.add("active");
@@ -162,7 +237,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         <div class="text-center mb-6">
                             <h4 class="mb-2">Hvala, {{ Auth::user()->name }}&#x1F49C</h4>
-                            <p>Možeš podržati naš dalji rad jednokratnom donacijom <a href="{{url("donate")}}"><u>ovde</u></a>
+                            <p>Možeš podržati naš dalji rad jednokratnom donacijom <a
+                                    href="{{ url('donate') }}"><u>ovde</u></a>
                                 &#x1F49C </p>
                         </div>
                     </div>

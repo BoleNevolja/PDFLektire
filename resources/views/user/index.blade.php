@@ -4,6 +4,11 @@
     <title>PDFKnjige ┃ {{ $user->name }}</title>
 </head>
 @section('content')
+<style>
+    .hidden{
+        display: none;
+    }
+</style>
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Header -->
         <div class="row">
@@ -37,6 +42,19 @@
                                         @if(Auth::user()->id == $user->id)
                                         <a href="{{url("user/settings/" . $user->id)}}"><button style="margin-top:10px" type="button" class="btn btn-label-primary waves-effect"><i class="ri-edit-box-line" style="margin-right:3px"></i>Uredi profil</button></a>
                                         @endif
+                                        @if($user->facebook != null)
+                                        <a href="{{$user->facebook}}">
+                                        <button href="{{$user->facebook}}" type="button"  style="height:35px;margin-top:10px" class="btn btn-icon btn-facebook waves-effect waves-light">
+                                          <i style="height:25px" class="ri-facebook-box-fill"></i>
+                                        </button></a>
+                                        @endif
+                                        @if($user->instagram != null)
+                                        <a href="{{$user->instagram}}">
+                                        <button href="{{$user->facebook}}" type="button"  style="height:35px;margin-top:10px" class="btn btn-icon btn-instagram waves-effect waves-light">
+                                          <i style="height:25px" class="ri-instagram-fill"></i>
+                                        </button></a>
+                                        @endif
+
                                 </div>
                             </div>
                         </div>
@@ -52,13 +70,19 @@
                 <div class="nav-align-top">
                     <ul class="nav nav-pills flex-column flex-sm-row mb-6 gap-2 gap-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active waves-effect waves-light" href="#####"><i class="ri-download-2-line"
+                            <a class="nav-link active waves-effect waves-light" onclick="down()" id="down" href="javascript:void(0)"><i class="ri-download-2-line"
                                     style="margin-right:5px"></i> Preuzimanja</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light" id="favs" onclick="favorites()" href="javascript:void(0)"><i class="ri-hearts-line"
+                                    style="margin-right:5px"></i> Omiljene</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+        <div id="downloads">
+          @if($user->download_status == 1 || Auth::user()->id == $user->id)
         @foreach($downloads as $download)
         <a href="{{url("book", $download->book->id)}}"><div class="row mb-12 g-6">
             <div class="col-md">
@@ -80,8 +104,55 @@
             </div>
           </div>
           @endforeach
+          @else
+          <h4>Korisnik ne želi prikazati svoja preuzimanja</h4>
+          @endif
+        </div>
+
+
+        <div id="favorites" class="hidden">
+          @if($user->like_status == 1 || Auth::user()->id == $user->id)
+             @foreach($favorites as $favorite)
+            <a href="{{url("book", $favorite->book->id)}}"><div class="row mb-12 g-6">
+                <div class="col-md">
+                  <div class="card">
+                    <div class="row g-0">
+    
+                        <img class="card-img card-img-left" style="height:220px; width:220px" src="{{asset($favorite->book->thumbnail)}}" alt="Card image">
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{$favorite->book->name}}</h5>
+                          <p class="card-text">
+                            {{$favorite->book->desc}}
+                          </p>
+                          <p class="card-text"><small class="text-muted">Dodano {{ $favorite->created_at->format('d F Y') }}</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @endforeach
+            @else
+            <h4>Korisnik ne želi prikazati svoje omiljene knjige</h4>
+          @endif
+        </div>
+
 
           <script>
             document.getElementById("profile-btn").classList.add("active");
+            function down(){
+                document.getElementById("down").classList.add("active");
+                document.getElementById("downloads").classList.remove("hidden");
+                document.getElementById("favs").classList.remove("active");
+                document.getElementById("favorites").classList.add("hidden");
+            }
+
+            function favorites(){
+                document.getElementById("down").classList.remove("active");
+                document.getElementById("downloads").classList.add("hidden");
+                document.getElementById("favs").classList.add("active");
+                document.getElementById("favorites").classList.remove("hidden");
+            }
         </script>
     @endsection

@@ -56,17 +56,21 @@ class BookController extends Controller
     public function index($id){
         $book = Book::findOrFail($id);
         $downloads = Download::where('book_id', $id)
+                          ->whereHas('user', function ($query) {
+                           $query->where('download_status', 1);})
                           ->with('user') 
                           ->latest()      
                           ->get();
         $comments = Comment::where('book_id', $id)
                           ->with('user') // Include user details (if applicable)
                           ->latest()     // Sort by the latest comments
-                          ->get();                 
+                          ->get();
+        $user = Auth::user();                 
         $data = [
             "book" => $book,
             "downloads" => $downloads,
             "comments" => $comments,
+            "user" => $user,
         ];
         return view("book.index", $data);
     }
@@ -161,5 +165,20 @@ class BookController extends Controller
             "newBook" => $newBook,
         ];
         return view("book.status",$data);
+    }
+
+    public function like(Request $request){
+        $user = auth()->user();
+        $bookId = $request->book_id;
+        $user->favorites()->create(['book_id' => $bookId]);
+        return response()->json(['message' => 'Book added to favorites successfully!']);
+    }
+
+    public function unlike(Request $request){
+        $user = auth()->user();
+        $bookId = $request->book_id;
+        $favorite = $user->favorites()->where('book_id', $bookId)->first();
+        $favorite->delete();
+        return response()->json(['message' => 'Book removed from favorites successfully.']);
     }
 }

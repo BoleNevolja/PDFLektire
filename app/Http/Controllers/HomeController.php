@@ -40,10 +40,12 @@ class HomeController extends Controller
 
     public function find(){
         $search_text = $_GET['querry'];
+        $cc = 7827878;
     
         $books = Book::where('name', 'like', '%' . $search_text . '%')->orWhere('author', 'like', '%' . $search_text . '%')->get();
         $data = [
             'books' => $books,
+            "cc" => $cc
         ];
     
         return view('home', $data);

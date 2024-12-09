@@ -56,4 +56,14 @@ public function books(){
 public function comments(){
     return $this->hasMany(Comment::class);
 }
+
+public function favorites()
+{
+    return $this->hasMany(Favorite::class);
+}
+
+public function favoriteBooks()
+{
+    return $this->belongsToMany(Book::class, 'favorites');
+}
 }

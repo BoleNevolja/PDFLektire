@@ -26,6 +26,8 @@ Route::get('/textbook', [App\Http\Controllers\BookController::class, 'textbook']
 Route::get('/our', [App\Http\Controllers\BookController::class, 'our'])->name('our')->middleware("auth");
 Route::get('/publish', [App\Http\Controllers\BookController::class, 'publish'])->name('publish')->middleware("auth");
 Route::post('/published', [App\Http\Controllers\BookController::class, 'published'])->name('published')->middleware("auth");
+Route::post('/add/favorite', [App\Http\Controllers\BookController::class, 'like'])->name('like')->middleware("auth");
+Route::delete('/remove/favorite', [App\Http\Controllers\BookController::class, 'unlike'])->name('unlike')->middleware("auth");
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])->name('user')->middleware("auth");
 Route::get('/user/settings/{id}', [App\Http\Controllers\UserController::class, 'settings'])->name('settings')->middleware("auth");
