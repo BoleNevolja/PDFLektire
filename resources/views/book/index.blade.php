@@ -132,12 +132,15 @@
                 <h3>NEMA KOMENTARA</h3>
             @endif
             @foreach ($comments as $comment)
-                <div class="card">
+                <div id="delbtn-{{ $comment->id }}" class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ $comment->user->name }}</h5>
                         <p class="card-text"><small class="text-muted">{{ $comment->content }}</small></p>
+                        @if(Auth::user()->id == $comment->user->id)
+                        <button class="btn btn-danger" onclick="deleteComment({{$comment->id}})"><i class="ri-delete-bin-line"></i>Obriši komentar</button>
+                        @endif
                     </div>
-                </div>
+                </div><br>
             @endforeach
         </div>
 
@@ -156,6 +159,23 @@
         </div>
 
         <script>
+            function deleteComment(commentId) {
+        $.ajax({
+            url: "{{ route('removecoment') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}", // Include CSRF token
+                id: commentId
+            },
+            success: function(response) {
+                document.getElementById("delbtn-" + commentId).classList.add("hidden");
+                console.log("Success");
+            },
+            error: function(xhr) {
+                console.log("Error");
+            }
+        });
+    }
             function addToFavorites(bookId) {
                 $.ajax({
                     url: '{{ route('like') }}',

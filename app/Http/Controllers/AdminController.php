@@ -66,4 +66,21 @@ class AdminController extends Controller
 
         return redirect("/chat");
     }
+
+    public function reply($id){
+        $notification = Notification::findOrFail($id);
+        if(Auth::user()->id != $notification->user_id){
+            return abort(403, "Neovlašteno");
+        }
+        $msg_id = $notification->content_id;
+        $answer = Answer::findOrFail($msg_id);
+        $msg_id = $answer->message_id;
+        $message = Message::findOrFail($msg_id);
+        $data = [
+            'notification' => $notification,
+            'answer' => $answer,
+            'message' => $message,
+        ];
+        return view('notification.nots', $data);
+    }
 }

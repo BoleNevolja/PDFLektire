@@ -16,6 +16,7 @@ Route::get('/donate', [App\Http\Controllers\HomeController::class, 'donate'])->n
 Route::get('/notifications', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications')->middleware("auth");
 Route::delete('/notification/delete', [App\Http\Controllers\HomeController::class, 'deletenot'])->name('notification.delete')->middleware("auth");
 
+
 Route::get('/book/create', [App\Http\Controllers\BookController::class, 'create'])->name('addbook')->middleware("auth");
 Route::post('/store/book', [App\Http\Controllers\BookController::class, 'store'])->name('storebook')->middleware("auth");
 Route::get('/book/{id}', [App\Http\Controllers\BookController::class, 'index'])->name('book')->middleware("auth");
@@ -37,5 +38,8 @@ Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->
 Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");
 Route::post('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->name('sent')->middleware("auth");
 Route::post('/respond', [App\Http\Controllers\AdminController::class, 'respond'])->name('respond')->middleware("auth");
+Route::get('/notification/reply/{id}', [App\Http\Controllers\AdminController::class, 'reply'])->name('notification')->middleware("auth");
+Route::get('/notification/dwn/{id}', [App\Http\Controllers\AdminController::class, 'dwn'])->name('dwn')->middleware("auth");
 
 Route::post('/addcomment', [App\Http\Controllers\CommentController::class, 'add'])->name('addcoment')->middleware("auth");
+Route::post('/removecomment', [App\Http\Controllers\CommentController::class, 'remove'])->name('removecoment')->middleware("auth");

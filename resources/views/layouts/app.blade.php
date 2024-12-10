@@ -211,7 +211,7 @@
                                 <div class="search-bar-wrapper">
                                     <form action="/search">
                                         @csrf
-                                        <input type="text" name="querry" id="querry" style="width:1270px"
+                                        <input type="text" name="querry" id="querry" style="width:1170px"
                                             class="form-control" placeholder="Pronađite Vašu traženu knjigu..." />
                                     </form>
                                 </div>

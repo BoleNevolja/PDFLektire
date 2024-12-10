@@ -20,4 +20,11 @@ class CommentController extends Controller
         return redirect()->back();
 
     }
+
+    public function remove(Request $request){
+    $commentId = $request->input('id');
+    $comment = Comment::find($commentId);
+    $comment->delete();
+    return response()->json(['message' => 'Comment deleted successfully']);
+}
 }

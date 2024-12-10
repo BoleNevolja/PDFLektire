@@ -69,9 +69,9 @@ class HomeController extends Controller
         $data = [
             'notifications' => $notifications,
         ];
-        return view('notification', $data);
+        return view('notification.notification', $data);
     }
-
+    
     public function deletenot(Request $request){
         $notification = Notification::find($request->notification_id);
         $notification->delete();

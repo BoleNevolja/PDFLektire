@@ -6,7 +6,7 @@
 @endif
 
 @foreach ($notifications as $notification)
-<a href="####">
+<a href="{{url("notification/reply/" . $notification->id)}}">
     <div class="alert alert-primary alert-dismissible" role="alert">
     @if($notification->content_type == 1)
     <h4 style="color:#8152a1; margin-bottom:2px">{{Auth::user()->name}}, Vaša poruka je dobila odgovor</h4>
