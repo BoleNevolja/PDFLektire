@@ -82,6 +82,19 @@
       </div>
     </div>
 
+    <div class="card accordion-item">
+      <h2 class="accordion-header">
+        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionStyle1-6" aria-expanded="false">
+          Kako mogu da podržim rad PDFKnjiga?
+        </button>
+      </h2>
+      <div id="accordionStyle1-6" class="accordion-collapse collapse" data-bs-parent="#accordionStyle1" style="">
+        <div class="accordion-body">
+          Možete da nas podržite jednokratnom donacijom <a href="{{route("donate")}}"><u>ovde</u></a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 <script>

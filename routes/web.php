@@ -33,6 +33,7 @@ Route::delete('/remove/favorite', [App\Http\Controllers\BookController::class, '
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])->name('user')->middleware("auth");
 Route::get('/user/settings/{id}', [App\Http\Controllers\UserController::class, 'settings'])->name('settings')->middleware("auth");
 Route::put('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('edituser')->middleware("auth");
+Route::put('/user/picture/{id}', [App\Http\Controllers\UserController::class, 'picture'])->name('picture')->middleware("auth");
 
 Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->name('status')->middleware("auth");
 Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");

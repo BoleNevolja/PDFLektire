@@ -54,4 +54,20 @@ class UserController extends Controller
         }
         return redirect()->back();
     }
+
+    public function picture(Request $request){
+        $request->validate([
+            'image' => ['mimes:jpeg,png,jpg'],
+        ]);
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+        if($user->image_path != "profile.png"){
+            unlink("profile/" . $user->image_path);
+        }
+        $imageName = $id . "-" . rand(100,999) . "." . $request->image->extension();
+        $request->image->move(public_path("profile"), $imageName);
+        $user->image_path = $imageName;
+        $user->save();
+        return redirect()->back();
+    }
 }
