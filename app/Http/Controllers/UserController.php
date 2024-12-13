@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Download;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PDF;
 
 class UserController extends Controller
 {
@@ -31,8 +32,20 @@ class UserController extends Controller
         if(Auth::user()->id != $id){
             return abort(403,"Neovlašteno");
         };
+        $books = Book::where('user_id', $id)->get();
+
+        $downloads = Download::whereHas('book', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+        $latestDownload = Download::whereHas('book', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->latest()->first();
+
         $data = [
             "user" => $user,
+            "books" => $books,
+            "downloads" => $downloads,
+            "latestDownload" => $latestDownload,
         ];
         return view("settings", $data);
     }
@@ -69,5 +82,23 @@ class UserController extends Controller
         $user->image_path = $imageName;
         $user->save();
         return redirect()->back();
+    }
+
+    public function downloadSummary(){
+        $user = Auth::user();
+        $data = [
+            "user" => $user,
+        ];
+        $pdf = Pdf::loadView('pdf.certificate', $data);
+        return $pdf->download('izvještaj.pdf');
+    }
+
+    public function downloadPremium(){
+        $user = Auth::user();
+        $data = [
+            "user" => $user,
+        ];
+        $pdf = Pdf::loadView('pdf.premium', $data);
+        return $pdf->download('premium.pdf');
     }
 }

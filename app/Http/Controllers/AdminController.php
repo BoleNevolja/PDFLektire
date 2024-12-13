@@ -17,7 +17,7 @@ class AdminController extends Controller
         if(Auth::user()->role != 2){
             return abort(403, "Neovlašteno");
         }
-        $books = Book::where("status",1);
+        $books = Book::where("status",1)->get();
         $data = [
             "books" => $books,
         ];
@@ -82,5 +82,61 @@ class AdminController extends Controller
             'message' => $message,
         ];
         return view('notification.nots', $data);
+    }
+
+    public function accept(Request $request){
+        $bookId = $request->input('id');
+        $book = Book::findOrFail($bookId);
+        $book->status = 2;
+        $book->save();
+        $id = $book->user_id;
+        $user = User::findOrFail($id);
+        $user->author = 1;
+        $user->save();
+
+        $notification = new Notification;
+        $notification->user_id = $user->id;
+        $notification->content_id = $book->id;
+        $notification->content_type = 3;
+        $notification->status = 1;
+        $t = "Vaša knjiga je odobrena. Proverite!";
+        $notification->short_text = $t;
+        $notification->save();
+
+        return response()->json(['message' => 'Success']);    
+    }
+
+    public function reject(Request $request){
+        $bookId = $request->input('id');
+        $book = Book::findOrFail($bookId);
+        $book->delete();
+        $id = $book->user_id;
+        $user = User::findOrFail($id);
+
+        $notification = new Notification;
+        $notification->user_id = $user->id;
+        $notification->content_id = "###";
+        $notification->content_type = 4;
+        $notification->status = 1;
+        $t = "Vaša knjiga je odbijena. Žao nam je!";
+        $notification->short_text = $t;
+        $notification->save();
+
+        $thumbnailPath = public_path($book->thumbnail);
+        $filePath = public_path($book->file_path);
+        unlink($thumbnailPath);
+        unlink($filePath);
+        return response()->json(['message' => 'Success']);    
+    }
+
+    public function remove(Request $request){
+        $bookId = $request->input('id');
+        $book = Book::findOrFail($bookId);
+        $book->delete();
+        $thumbnailPath = public_path($book->thumbnail);
+        $filePath = public_path($book->file_path);
+        unlink($thumbnailPath);
+        unlink($filePath);
+        return response()->json(['message' => 'Success']);   
     }
 }

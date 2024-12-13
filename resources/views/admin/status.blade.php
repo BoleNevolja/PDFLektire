@@ -1,29 +1,73 @@
 @extends('layouts.app')
 @section('content')
-    <div style="margin-left:125px; margin-top:40px">
-        <div class="row row-cols-1 row-cols-md-5 g-2">
+<style>
+    .hidden{
+        display: none;
+    }
+</style>
+    <div style="margin-left:3%;margin-right:3%; margin-top:40px">
             @foreach ($books as $book)
-                <a href="{{ url('/book/' . $book->id) }}">
-                    <div class="col">
-                        <div class="card h-100" style="width:300px; height:600px; max-height:600px">
-                            <img class="card-img-top" src="{{ asset($book->thumbnail) }}" alt="thumbnail">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $book->name }}</h5>
-                                <h6><i>{{ $book->author }}</i></h6>
-                                <p class="card-text">
-                                    {{ Str::limit($book->desc, 70) }}
-                                </p>
-                                @if ($book->textbook == 2)
-                                    <div class="badge bg-primary rounded-pill ms-auto">LEKTIRA</div>
-                                @endif
-                                @if ($book->created_at->diffInDays() <= 7)
-                                    <div class="badge bg-danger rounded-pill ms-auto">NOVO</div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
+                          <div id="card-{{$book->id}}" class="row mb-12 g-6">
+                              <div class="col-md">
+                                  <div class="card">
+                                      <div class="row g-0">
+  
+                                          <img class="card-img card-img-left" style="height:200px; width:200px"
+                                              src="{{ asset($book->thumbnail) }}" alt="Card image">
+                                          <div class="col-md-8">
+                                              <div class="card-body">
+                                                  <h5 class="card-title">{{ $book->name }}</h5>
+                                                  <p class="card-text">
+                                                      {{ $book->desc }}
+                                                  </p>
+                                                  <button onclick="accept({{$book->id}})" class="btn btn-success">Odobri</button>
+                                                  <button onclick="reject({{$book->id}})" class="btn btn-danger">Odbij</button>
+                                                  <a href="{{ url('book', $book->id) }}">
+                                                  <button class="btn btn-primary">Više informacija</button></a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  @endforeach
     </div>
+    <script>
+    function accept(bookId) {
+        $.ajax({
+            url: "{{ route('accept') }}",
+            type: "PUT",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: bookId
+            },
+            success: function(response) {
+                document.getElementById("card-" + bookId).classList.add("hidden");
+                console.log("Success");
+            },
+            error: function(xhr) {
+                console.log("Error");
+            }
+        });
+    }
+
+    function reject(bookId) {
+        $.ajax({
+            url: "{{ route('reject') }}",
+            type: "DELETE",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: bookId
+            },
+            success: function(response) {
+                document.getElementById("card-" + bookId).classList.add("hidden");
+                console.log("Success");
+            },
+            error: function(xhr) {
+                console.log("Error");
+                document.getElementById("card-" + bookId).classList.add("hidden");
+            }
+        });
+    }
+    </script>
 @endsection

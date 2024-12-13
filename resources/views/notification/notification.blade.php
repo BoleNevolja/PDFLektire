@@ -6,10 +6,16 @@
 @endif
 
 @foreach ($notifications as $notification)
-<a href="{{url("notification/reply/" . $notification->id)}}">
     <div class="alert alert-primary alert-dismissible" role="alert">
     @if($notification->content_type == 1)
+    <a href="{{url("notification/reply/" . $notification->id)}}">
     <h4 style="color:#8152a1; margin-bottom:2px">{{Auth::user()->name}}, Vaša poruka je dobila odgovor</h4>
+    @elseif($notification->content_type == 3)
+    <a href="{{url("book/" . $notification->content_id)}}">
+    <h4 style="color:#8152a1; margin-bottom:2px">{{Auth::user()->name}}, recenzija Vaše knjige je završena</h4>
+    @elseif($notification->content_type == 4)
+    <a href="{{url("###")}}">
+    <h4 style="color:#8152a1; margin-bottom:2px">{{Auth::user()->name}}, recenzija Vaše knjige je završena</h4>
     @else
     <h4 style="color:#8152a1; margin-bottom:2px">{{Auth::user()->name}}, knjiga koja Vam se sviđa dobila je promjenu</h4>
     @endif

@@ -34,6 +34,8 @@ Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'index'])-
 Route::get('/user/settings/{id}', [App\Http\Controllers\UserController::class, 'settings'])->name('settings')->middleware("auth");
 Route::put('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('edituser')->middleware("auth");
 Route::put('/user/picture/{id}', [App\Http\Controllers\UserController::class, 'picture'])->name('picture')->middleware("auth");
+Route::get('/summary', [App\Http\Controllers\UserController::class, 'downloadSummary'])->name('summary')->middleware("auth");
+Route::get('/vip', [App\Http\Controllers\UserController::class, 'downloadPremium'])->name('premium')->middleware("auth");
 
 Route::get('/status', [App\Http\Controllers\AdminController::class, 'status'])->name('status')->middleware("auth");
 Route::get('/chat', [App\Http\Controllers\AdminController::class, 'chat'])->name('chat')->middleware("auth");
@@ -41,6 +43,9 @@ Route::post('/sent', [App\Http\Controllers\AdminController::class, 'sent'])->nam
 Route::post('/respond', [App\Http\Controllers\AdminController::class, 'respond'])->name('respond')->middleware("auth");
 Route::get('/notification/reply/{id}', [App\Http\Controllers\AdminController::class, 'reply'])->name('notification')->middleware("auth");
 Route::get('/notification/dwn/{id}', [App\Http\Controllers\AdminController::class, 'dwn'])->name('dwn')->middleware("auth");
+Route::put('/status/accept', [App\Http\Controllers\AdminController::class, 'accept'])->name('accept')->middleware("auth");
+Route::delete('/status/reject', [App\Http\Controllers\AdminController::class, 'reject'])->name('reject')->middleware("auth");
+Route::delete('/remove/book', [App\Http\Controllers\AdminController::class, 'remove'])->name('remove')->middleware("auth");
 
 Route::post('/addcomment', [App\Http\Controllers\CommentController::class, 'add'])->name('addcoment')->middleware("auth");
 Route::post('/removecomment', [App\Http\Controllers\CommentController::class, 'remove'])->name('removecoment')->middleware("auth");

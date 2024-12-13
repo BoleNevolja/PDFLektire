@@ -109,8 +109,8 @@
                 <h6 id="joke-t" class="card-text hidden"><small class="text-muted">Poslano!</small></h6>
                 <hr style="width:30%">
                 <h6>Preuzimanja:</h6>
-                <button class="btn btn-success">Lični izvještaj</button>
-                <button class="btn btn-success">Premium certifikat</button>
+                <a href="{{url("summary")}}"><button class="btn btn-success">Lični izvještaj</button></a>
+                <a href="{{url("vip")}}"> <button class="btn btn-success">Premium certifikat</button></a>
                 <script>
                     function joke() {
                         document.getElementById("joke").value = ''
@@ -122,13 +122,90 @@
                 </script>
             @endif
         </div>
+
         @if ($user->author == 1)
             <div id="auth" class="hidden wc">
-                <h1>AUTOR OPCIJE</h1>
+                <div class="row mb-6"  style="margin-left:1%; margin-top:10px" id="sortable-cards">
+                
+                
+                    <div class="col-lg-3 col-md-6 col-sm-12" style="">
+                      <div class="card  mb-lg-0 mb-6">
+                        <div class="card-body text-center">
+                          <h2>
+                            <i style="color:#9c60e0" class="ri-download-fill"></i>
+                          </h2>
+                          <h4>Preuzimanja</h4>
+                          <h5>{{$downloads->count()}}</h5>
+                        </div>
+                      </div>
+                    </div><div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="card mb-lg-0 mb-6">
+                        <div class="card-body text-center">
+                          <h2>
+                            <i style="color:#1a9138" class="ri-money-dollar-circle-line"></i>
+                          </h2>
+                          <h4>Naknada</h4>
+                          <h5>SOON</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="card mb-lg-0 mb-6">
+                        <div class="card-body text-center">
+                          <h2>
+                            <i class="ri-user-line"></i>
+                          </h2>
+                          <h4>Posljednje preuzimanje</h4>
+                          <h5>@if($latestDownload == null)Nema preuzimanja @else{{$latestDownload}}@endif</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-left:2%;margin-right:17%; margin-top:40px">
+                  @foreach ($books as $book)
+                          <div class="row mb-12 g-6" id="card-{{$book->id}}">
+                              <div class="col-md">
+                                  <div class="card">
+                                      <div class="row g-0">
+  
+                                          <img class="card-img card-img-left" style="height:220px; width:220px"
+                                              src="{{ asset($book->thumbnail) }}" alt="Card image">
+                                          <div class="col-md-8">
+                                              <div class="card-body">
+                                                  <h3 class="card-title">{{ $book->name }}</h3>
+                                                         <h5>{{ $book->downloads->count() }} preuzimanja</h5>
+                                                         <button onclick="remove({{$book->id}})" class="btn btn-danger">Obriši knjigu</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  @endforeach
+                        </div>
             </div>
         @endif
     </div>
     <script>
+        function remove(bookId){
+            $.ajax({
+            url: "{{ route('remove') }}",
+            type: "DELETE",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: bookId
+            },
+            success: function(response) {
+                document.getElementById("card-" + bookId).classList.add("hidden");
+                console.log("Success");
+            },
+            error: function(xhr) {
+                console.log("Error");
+                document.getElementById("card-" + bookId).classList.add("hidden");
+            }
+        });
+        }
         function edit() {
             document.getElementById("edit-btn").classList.add("active");
             document.getElementById("edit").classList.remove("hidden");
