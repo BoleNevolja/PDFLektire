@@ -206,17 +206,11 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
-                        <div class="navbar-nav align-items-center" style="margin-top:2px">
-                            <div class="nav-item navbar-search-wrapper mb-0">
-                                <div class="search-bar-wrapper">
-                                    <form action="/search">
+                                    <form action="/search"style="width:94%">
                                         @csrf
-                                        <input type="text" name="querry" id="querry" style="width:600%"
+                                        <input type="text" name="querry" id="querry"
                                             class="form-control" placeholder="Pronađite Vašu traženu knjigu..." />
                                     </form>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- /Search -->
 

@@ -18,6 +18,8 @@
                                 </p>
                                 @if ($book->textbook == 2)
                                     <div class="badge bg-primary rounded-pill ms-auto">LEKTIRA</div>
+                                @else
+                                    <br>
                                 @endif
                                 @if ($book->created_at->diffInDays() <= 7)
                                     <div class="badge bg-danger rounded-pill ms-auto">NOVO</div>
@@ -29,21 +31,21 @@
             @endforeach
         </div>
     </div>
-    @if($cc == 1)
-    <script>
-        document.getElementById("new-btn").classList.add("active");
-    </script>
+    @if ($cc == 1)
+        <script>
+            document.getElementById("new-btn").classList.add("active");
+        </script>
     @elseif($cc == 2)
-    <script>
-        document.getElementById("lek-btn").classList.add("active");
-    </script>
+        <script>
+            document.getElementById("lek-btn").classList.add("active");
+        </script>
     @elseif($cc == 3)
-    <script>
-        document.getElementById("our-btn").classList.add("active");
-    </script>
+        <script>
+            document.getElementById("our-btn").classList.add("active");
+        </script>
     @else
-    <script>
-        document.getElementById("home-btn").classList.add("active");
-    </script>
+        <script>
+            document.getElementById("home-btn").classList.add("active");
+        </script>
     @endif
 @endsection

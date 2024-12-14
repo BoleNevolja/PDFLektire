@@ -25,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $books = Book::where('status', 2)->get();
+        $books = Book::where('status', 2)
+             ->inRandomOrder()
+             ->take(20)
+             ->get();
         $cc = 4243765;
         $data = [
             'books' => $books,
