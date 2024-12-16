@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    #search-bar{
+            margin-top: 15px;
+        }
+</style>
 <div style="margin-left:125px; margin-top:40px; margin-right:140px">
 @if($notifications->isEmpty())
 <h4 class="no-post"><i>NEMA NOTIFIKACIJA</i>&#128531;</h4>

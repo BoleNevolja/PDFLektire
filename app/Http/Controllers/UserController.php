@@ -17,10 +17,15 @@ class UserController extends Controller
                           ->with('book') 
                           ->latest()      
                           ->get();
+        $books = Book::where('user_id', $id)
+                          ->with('book') 
+                          ->latest()      
+                          ->get();
 
         $favorites = $user->favorites()->whereHas('book')->get();
         $data = [
             "user" => $user,
+            "books" => $books,
             "downloads" => $downloads,
             "favorites" => $favorites,
         ];

@@ -8,7 +8,23 @@
         .hidden {
             display: none;
         }
+        #search-bar{
+            margin-top: 15px;
+        }
     </style>
+
+    <div id="like-conf" style="margin-left:2%; margin-right:2%; margin-top:10px" class="hidden card shadow-none bg-success-subtle">
+        <div class="card-body">
+          <h5 class="card-title text-success"><b><i>{{$book->name}}</i></b> uspješno dodana u omiljene</h5>
+        </div>
+      </div>
+
+      <div id="unlike-conf" style="margin-left:2%; margin-right:2%; margin-top:10px" class="hidden card shadow-none bg-danger-subtle">
+        <div class="card-body">
+          <h5 class="card-title text-danger"><b><i>{{$book->name}}</i></b> uspješno uklonjena iz omiljenih</h5>
+        </div>
+      </div>
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Header -->
         <div class="row">
@@ -157,7 +173,6 @@
                 </div>
             @endforeach
         </div>
-
         <script>
             function deleteComment(commentId) {
         $.ajax({
@@ -188,6 +203,10 @@
                         console.log("Success");
                         document.getElementById("unlike").classList.remove("hidden");
                         document.getElementById("like").classList.add("hidden");
+                        document.getElementById("like-conf").classList.remove("hidden");
+                        setTimeout(function() {
+                            document.getElementById("like-conf").classList.add("hidden");
+                        }, 2000);
                     },
                     error: function(xhr) {
                         console.log("Error");
@@ -207,6 +226,10 @@
                         console.log("Success");
                         document.getElementById("like").classList.remove("hidden");
                         document.getElementById("unlike").classList.add("hidden");
+                        document.getElementById("unlike-conf").classList.remove("hidden");
+                        setTimeout(function() {
+                            document.getElementById("unlike-conf").classList.add("hidden");
+                        }, 2000);
                     },
                     error: function(xhr) {
                         console.log("Error");

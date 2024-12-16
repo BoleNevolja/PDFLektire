@@ -5,6 +5,10 @@
 </head>
 @section('content')
     <style>
+        #search-bar{
+            margin-top: 15px;
+        }
+        
         .hidden {
             display: none;
         }
@@ -136,6 +140,13 @@
                                 href="javascript:void(0)"><i class="ri-hearts-line" style="margin-right:5px"></i>
                                 Omiljene</a>
                         </li>
+                        @if($user->author == 1)
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light" id="my" onclick="my()"
+                                href="javascript:void(0)"><i class="ri-git-repository-line" style="margin-right:5px"></i>
+                                {{$user->name}} knjige</a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -203,6 +214,33 @@
             @endif
         </div>
 
+        <div id="mine" class="hidden">
+            @foreach($books as $book)
+            <a href="{{ url('book', $book->id) }}">
+                <div class="row mb-12 g-6">
+                    <div class="col-md">
+                        <div class="card">
+                            <div class="row g-0">
+
+                                <img class="card-img card-img-left" style="height:220px; width:220px"
+                                    src="{{ asset($book->thumbnail) }}" alt="Card image">
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $book->name }}</h5>
+                                        <p class="card-text">
+                                            {{ $favorite->book->desc }}
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Objavljeno
+                                                {{ $book->created_at->format('d F Y') }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
 
         <script>
             document.getElementById("profile-btn").classList.add("active");
@@ -212,6 +250,8 @@
                 document.getElementById("downloads").classList.remove("hidden");
                 document.getElementById("favs").classList.remove("active");
                 document.getElementById("favorites").classList.add("hidden");
+                document.getElementById("my").classList.remove("active");
+                document.getElementById("mine").classList.add("hidden");
             }
 
             function favorites() {
@@ -219,6 +259,17 @@
                 document.getElementById("downloads").classList.add("hidden");
                 document.getElementById("favs").classList.add("active");
                 document.getElementById("favorites").classList.remove("hidden");
+                document.getElementById("my").classList.remove("active");
+                document.getElementById("mine").classList.add("hidden");
+            }
+
+            function my(){
+                document.getElementById("down").classList.remove("active");
+                document.getElementById("downloads").classList.add("hidden");
+                document.getElementById("favs").classList.remove("active");
+                document.getElementById("favorites").classList.add("hidden");
+                document.getElementById("my").classList.add("active");
+                document.getElementById("mine").classList.remove("hidden"); 
             }
         </script>
     @endsection

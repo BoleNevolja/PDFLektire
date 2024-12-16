@@ -125,7 +125,7 @@
 
         @if ($user->author == 1)
             <div id="auth" class="hidden wc">
-                <div class="row mb-6"  style="margin-left:1%; margin-top:10px" id="sortable-cards">
+                <div class="row mb-6"  style="margin-left:1%; margin-right:1%; margin-top:10px" id="sortable-cards">
                 
                 
                     <div class="col-lg-3 col-md-6 col-sm-12" style="">
