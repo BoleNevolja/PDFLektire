@@ -63,7 +63,14 @@
                                         class="btn btn-primary mb-1 waves-effect waves-light">
                                         <i class="ri-download-2-line" style="margin-right: 5px"></i></i>Preuzmi
                                     </a>
+                                    
+                                    
                                     <div class="favorite-buttons">
+                                        @guest
+                                    <h6>ULOGUJ SE ZA VIŠE</h6>
+                                    </div>
+                                    @endguest
+                                    @auth
                                         @if ($user->favoriteBooks->contains($book))
                                         <div id="unlike">
                                             <button style="height:40px;width:130px" id="unlike" onclick="removeFromFavorites({{ $book->id }})"
@@ -98,6 +105,7 @@
                                                 </button>
                                             </div>
                                         @endif
+                                        @endauth
                                     </div></div>
                                 </div>
                             </div>
@@ -107,7 +115,7 @@
             </div>
         </div>
         <!--/ Header -->
-
+@auth
         <!-- Navbar pills -->
         <div class="row">
             <div class="col-md-12">
@@ -288,4 +296,5 @@
                 </div>
             </div>
         </div>
+        @endauth
     @endsection

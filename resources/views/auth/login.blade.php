@@ -121,6 +121,9 @@
                                         {{ __('Zaboravio si šifru?') }}
                                     </a>
                                 @endif
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ __('Nemaš nalog?') }}
+                                </a>
                             </div>
                         </div>
                     </form>

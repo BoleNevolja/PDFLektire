@@ -66,7 +66,13 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-
+            @auth
+                @php
+                    $notifications = \App\Models\Notification::where('user_id', Auth::id())->where('status', 1)->get();
+                @endphp
+            @else
+                <p style="display: none">.</p>
+            @endauth
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="{{ url('home') }}" style="margin-top:10px" class="app-brand-link">
@@ -88,6 +94,7 @@
 
 
                     <!-- Layouts -->
+                    @auth
                     <li class="menu-item" id="profile-btn">
                         <a href="{{ url('user', Auth::user()->id) }}" class="menu-link">
                             <i class="ri-user-line" style="margin-right: 10px"></i>
@@ -98,8 +105,12 @@
                         <a href="{{ url('notifications') }}" class="menu-link">
                             <i class="ri-notification-3-line" style="margin-right: 10px"></i>
                             <div>Notifikacije</div>
+                            @if ($notifications->count() > 0)
+                                <div class="badge bg-danger rounded-pill ms-auto">{{ $notifications->count() }}</div>
+                            @endif
                         </a>
                     </li>
+                    @endauth
                     <li class="menu-header small">
                         <span class="menu-header-text">Liste</span>
                     </li>
@@ -168,6 +179,7 @@
                             <div style="margin-left:10px">Doniraj</div>
                         </a>
                     </li>
+                    @auth
                     @if (Auth::user()->role == 2)
                         <li class="menu-header small">
                             <span class="menu-header-text">Admin opcije</span>
@@ -188,7 +200,7 @@
                             </a>
                         </li>
                     @endif
-                </ul>
+                </ul>@endauth
             </aside>
             <!-- / Menu -->
 
@@ -206,16 +218,17 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
-                                    <form action="/search" id="search-bar" style="width:94%">
-                                        @csrf
-                                        <input type="text" name="querry" id="querry"
-                                            class="form-control" placeholder="Pronađite Vašu traženu knjigu..." />
-                                    </form>
+                        <form action="/search" id="search-bar" style="width:95%">
+                            @csrf
+                            <input type="text" name="querry" id="querry" class="form-control"
+                                placeholder="Pronađite Vašu traženu knjigu..." />
+                        </form>
 
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- User -->
+                            @auth
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
@@ -292,6 +305,14 @@
                                 </ul>
                             </li>
                             <!--/ User -->
+                            @endauth
+                            @guest
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">
+            <h6 style="white-space: nowrap; padding: 0; margin: 0;">Uloguj se</h6>
+        </a>
+    </li>
+@endguest
                         </ul>
                     </div>
 
